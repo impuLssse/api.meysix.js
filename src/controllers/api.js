@@ -1,7 +1,8 @@
 import express from 'express'
 import { header } from 'express-validator'
-import AuthMiddleware from '../middlewares/AuthMiddleware.js'
-import ValidationMiddleware from '../middlewares/ValidationMiddleware.js'
+import { AuthMiddleware } from '../middlewares/auth.js'
+
+import { ValidationMiddleware } from '../middlewares/validations.js'
 import passport from '../services/steam.js'
 
 const ApiRouter = express()

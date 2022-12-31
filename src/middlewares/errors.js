@@ -1,7 +1,5 @@
 
-
-
-class ApiError extends Error {
+export class ApiError extends Error {
     constructor (status, code, errors = []) {
         super(code)
         this.status = status
@@ -40,5 +38,3 @@ export function ErrorMiddleware (err, req, res, next) {
         }
     }
 }
-
-export default ApiError

@@ -1,5 +1,5 @@
 import express from 'express'
-import AuthSteamMiddleware from '../middlewares/AuthSteamMiddleware.js'
+import AuthSteamMiddleware from '../middlewares/auth.js'
 import passport from '../services/steam.js'
 
 const AuthSteamRouter = express()

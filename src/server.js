@@ -10,7 +10,7 @@ import c from 'colors'
 import router from './controllers/router.js'
 import mysql from './database.js'
 import passport from './services/steam.js'
-import { ErrorMiddleware } from './middlewares/ErrorMiddleware.js'
+import { ErrorMiddleware } from './middlewares/errors.js'
 
 
 const { PORT, SECRET } = process.env
