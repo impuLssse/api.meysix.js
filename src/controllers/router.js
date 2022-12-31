@@ -5,7 +5,7 @@ import UserRouter from './users.js'
 
 const router = express()
 
-router.use('/auth', AuthRouter)
+router.use('/login', AuthRouter)
 router.use('/users', UserRouter)
 router.use('/api', ApiRouter)
 

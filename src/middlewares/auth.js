@@ -1,11 +1,23 @@
+import Users from '../models/Users.js'
 import { ApiError } from './errors.js'
+import bcrypto from 'bcrypt'
+
 
 export function AuthMiddleware () {
-    return (req, res, next) => {
+    return async (req, res, next) => {
         try {
-            console.log(req.session)
-            return res.json(1)
+            const { nickname, password } = req.body
+            
+            const user = await Users.findOne({ where: { nickname: nickname } })
+            if (!user) throw ApiError.badRequest([ 'user is not found' ])
+            
+            const validPassword = bcrypto.compareSync(password, user.hashedPassword)
+            if (!validPassword) return res.status(403).json('Password is wrong')
+
+            console.log(`founded: `, user.nickname)
+            return res.json(user)
         } catch (e) {
+            console.log(e)
             next(e)
         }
     }
