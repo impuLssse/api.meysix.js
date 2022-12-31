@@ -13,9 +13,8 @@ import passport from './services/steam.js'
 import { ErrorMiddleware } from './middlewares/ErrorMiddleware.js'
 
 
-const port = 5000
+const { PORT, SECRET } = process.env
 const app = express()
-const logOff = { logging: false }
 
 app
     .use(cors({ origin: 'http://localhost:8080', credentials: true }))
@@ -25,7 +24,7 @@ app
     .use(session({
         resave: false,
         saveUninitialized: true,
-        secret: 'мурчалка',
+        secret: SECRET,
         cookie: {
             maxAge: (1000 * 60 * 100)
         },
@@ -34,17 +33,17 @@ app
     .use(ErrorMiddleware)
     .use(passport.initialize())
     .use(passport.session())
-    .listen(port, async () => {
+    .listen(PORT, async () => {
         try {
-            await mysql.authenticate(logOff)
-            await mysql.sync(logOff)
-            console.log(c.blue.bold(`[SERVER] success start on port ${port}`))
+            await mysql.authenticate()
+            await mysql.sync()
+            console.log(c.blue.bold(`[SERVER] success start on port ${PORT}`))
         } catch (e) {
             console.log(e)
             console.log(c.red.bold(`[SERVER] started is failed`))
         }
     })
 
-app.get('/', (req, res) => res.send('мурчу мурчу запутать хочу'))
+app.get('/', (req, res) => res.send('прокрастинация — игрушка дьявола'))
 
 export default app
